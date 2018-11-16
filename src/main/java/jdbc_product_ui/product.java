@@ -6,11 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
 
 import org.omg.IOP.ServiceContextListHolder;
 
 import jdbc_product.dto.Product;
 import jdbc_product.dto.sale;
+import jdbc_product_service.MyDocumentListener;
 import jdbc_product_service.SaleInputService;
 
 import java.awt.GridLayout;
@@ -120,8 +122,31 @@ public class product extends JFrame implements ActionListener {
 		btn2 = new JButton("출력2");
 		btn2.addActionListener(this);
 		panel_1.add(btn2);
+	
+		textcode.getDocument().addDocumentListener(new MyDocumentListener() {
+			
+			@Override
+			public void msg() {
+				if(textcode.getText().length() == 4) {
+					
+					Product pdt = new Product(textcode.getText().trim());
+					try {
+					Product searchPdt = service.searchProduct(pdt);
+						System.out.println(searchPdt);
+						textname.setText(searchPdt.getName());
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}catch(NullPointerException e) {
+						textname.setText("제품이없음");
+					}
+				}
+			
+			}
+			
+		
+		});	
 	}
-
+		
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn2) {
 			do_btn2_actionPerformed(e);
