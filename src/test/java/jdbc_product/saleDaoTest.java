@@ -47,9 +47,9 @@ public class saleDaoTest {
 		Assert.assertNotNull(lists);
 	}
 	@Test
-	public void test02InsertDepartment() {
+	public void test02InsertSale() {
 		try {
-			sale newDept = new sale(11,"A001",6000,130,16);
+			sale newDept = new sale(11,new Product("A001"),6000,130,16);
 			int rowAffected = dao.insertSale(newDept);
 			LogUtil.prnLog(String.format("rowAffected %d", rowAffected));
 			Assert.assertEquals(1, rowAffected);

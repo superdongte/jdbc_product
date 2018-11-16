@@ -6,11 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.omg.IOP.ServiceContextListHolder;
+
+import jdbc_product.dto.Product;
+import jdbc_product.dto.sale;
+import jdbc_product_service.SaleInputService;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.security.Provider.Service;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
 public class product extends JFrame implements ActionListener {
@@ -24,6 +34,7 @@ public class product extends JFrame implements ActionListener {
 	private JButton btnNewIN;
 	private JButton btn1;
 	private JButton btn2;
+	private SaleInputService service;
 
 	/**
 	 * Launch the application.
@@ -45,6 +56,7 @@ public class product extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public product() {
+		service = new SaleInputService();
 		initComponents();
 	}
 	private void initComponents() {
@@ -123,10 +135,52 @@ public class product extends JFrame implements ActionListener {
 	
 	}
 	protected void do_btnNewIN_actionPerformed(ActionEvent e) {
+			sale sales = getSale();
+			int res = 0;
+			try {
+				res = service.registerSale(sales);
+			if(res == 1) {
+				JOptionPane.showMessageDialog(null, "추가했다.");
+			}
+			clearTf();
+			}catch(SQLException e1) {
+				JOptionPane.showMessageDialog(null, "유효하지않은 명령이다.");
+				e1.printStackTrace();
+			}
+	}			
+	private void clearTf() {
+		textcode.setText("");
+		textname.setText("");
+		textprice.setText("");
+		textcount.setText("");
+		textmargin.setText("");
+		
 	}
-	
+
+	private sale getSale() {
+		String code = textcode.getText().trim();
+		int price = Integer.parseInt(textprice.getText().trim());
+		int saleCnt = Integer.parseInt(textcount.getText().trim());
+		int marginRate = Integer.parseInt(textmargin.getText().trim());
+		
+		
+		return new sale(0,new Product(code),price,saleCnt,marginRate);
+	}
+
 	protected void do_btn1_actionPerformed(ActionEvent e) {
+			showFrame(new marginRank());
+	
 	}
+	private void showFrame(marginRank marginRank) {
+			marginRank.setVisible(true);	
+	}
+
 	protected void do_btn2_actionPerformed(ActionEvent e) {
+			showFrame(new sellRank());
+	}
+
+	private void showFrame(sellRank sellRank) {
+			sellRank.setVisible(true);
+		
 	}
 }

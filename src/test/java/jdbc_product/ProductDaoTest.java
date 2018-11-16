@@ -77,7 +77,7 @@ public class ProductDaoTest {
 		}
 	}
 
-/*	@Test
+	@Test
 	public void test03UpdateDepartment() {
 		try {
 			Product updateDept = new Product("A008", "카푸치노");
@@ -93,12 +93,12 @@ public class ProductDaoTest {
 	public void test05SelectDepartmentByNo() {
 		try {
 			Product selDept = new Product();
-			selDept.setCode(1);
+			selDept.setCode("A004");
 			Product department = dao.selectDepartmentByNo(selDept);
 			LogUtil.prnLog(String.format("%s - %s", department.getClass().getSimpleName(), department));
 			Assert.assertNotNull(department);
 		} catch (SQLException e) {
 			LogUtil.prnLog(e);
 		}
-	}*/
+	}
 }

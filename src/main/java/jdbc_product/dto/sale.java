@@ -2,7 +2,7 @@ package jdbc_product.dto;
 
 public class sale {
 	private int no;
-	private String code;
+	private Product code;
 	private int price;
 	private int saleCnt;
 	private int marginRate;
@@ -21,11 +21,11 @@ public class sale {
 		this.no = no;
 	}
 
-	public String getCode() {
+	public Product getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(Product code) {
 		this.code = code;
 	}
 
@@ -53,9 +53,9 @@ public class sale {
 		this.marginRate = marginRate;
 	}
 
-	public sale(int no, String code, int price, int saleCnt, int marginRate) {
+	public sale(int no, Product product, int price, int saleCnt, int marginRate) {
 		this.no = no;
-		this.code = code;
+		this.code = product;
 		this.price = price;
 		this.saleCnt = saleCnt;
 		this.marginRate = marginRate;

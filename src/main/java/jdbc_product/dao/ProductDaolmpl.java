@@ -53,15 +53,15 @@ public  class ProductDaolmpl implements ProductDao {
 		String Name = rs.getString("name");
 		return new Product(code,Name);
 	}
-/*	private sale getProduct(ResultSet rs) throws SQLException{
+	private sale getProduct(ResultSet rs) throws SQLException{
 		int no = rs.getInt("no");
 		String code = rs.getString("code");
 		int price = rs.getInt("price");
 		int SaleCnt = rs.getInt("saleCnt");
 		int marginRate = rs.getInt("marginRate");
-		return new sale(no,code,price,SaleCnt,marginRate);
+		return new sale(no,new Product(code),price,SaleCnt,marginRate);
 	}
-	*/
+	
 	@Override
 	public int insertDepartment(Product department) throws SQLException {
 		LogUtil.prnLog("insertProduct()");
@@ -108,7 +108,7 @@ public  class ProductDaolmpl implements ProductDao {
 	public Product selectDepartmentByNo(Product department) throws SQLException {
 		LogUtil.prnLog("selectProductByNo()");
 		Product dept = null;
-		String sql = "SELECT code, name, from product where code=?";
+		String sql = "select code, name from Product where code=?";
 
 		try (Connection conn = ConnectionProvider.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, department.getCode());

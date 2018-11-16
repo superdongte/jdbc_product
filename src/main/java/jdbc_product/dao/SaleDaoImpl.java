@@ -24,16 +24,16 @@ public  class SaleDaoImpl implements SaleDao {
 				ResultSet rs = pstmt.executeQuery()){
 			LogUtil.prnLog(pstmt);
 			while (rs.next()) {
-				list.add(getProduct(rs));
+				list.add(getSale(rs));
 				}
 			} catch(SQLException e1) {
 				e1.printStackTrace();
 			}
 			return list;
 		}
-	private sale getProduct(ResultSet rs) throws SQLException{
+	private sale getSale(ResultSet rs) throws SQLException{
 		int no = rs.getInt("no");
-		String code = rs.getString("code");
+		Product code = new Product(rs.getString("code"));
 		int price = rs.getInt("price");
 		int SaleCnt = rs.getInt("saleCnt");
 		int marginRate = rs.getInt("marginRate");
@@ -46,7 +46,7 @@ public  class SaleDaoImpl implements SaleDao {
 		int rowAffected = 0;
 		try (Connection conn = ConnectionProvider.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setInt(1, department.getNo());
-			pstmt.setString(2, department.getCode());
+			pstmt.setString(2, department.getCode().getCode());
 			pstmt.setInt(3, department.getPrice());
 			pstmt.setInt(4, department.getSaleCnt());
 			pstmt.setInt(5, department.getMarginRate());
