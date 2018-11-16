@@ -191,21 +191,16 @@ public class product extends JFrame implements ActionListener {
 		
 		return new sale(0,new Product(code),price,saleCnt,marginRate);
 	}
-
+	//출력1
 	protected void do_btn1_actionPerformed(ActionEvent e) {
-			showFrame(new marginRank());
+			OutputUI ui = new OutputUI(true);
+			ui.setVisible(true);
+			
 	
 	}
-	private void showFrame(marginRank marginRank) {
-			marginRank.setVisible(true);	
-	}
-
 	protected void do_btn2_actionPerformed(ActionEvent e) {
-			showFrame(new sellRank());
+		OutputUI ui = new OutputUI(false);
+		ui.setVisible(true);
 	}
 
-	private void showFrame(sellRank sellRank) {
-			sellRank.setVisible(true);
-		
-	}
 }

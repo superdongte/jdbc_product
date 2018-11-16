@@ -6,4 +6,5 @@ import jdbc_product.dto.sale;
 public interface SaleDao {
 	int insertSale(sale department) throws SQLException;
 	List<sale> sellRanklist();
+	List<sale> selectSaleRank(boolean isSale) throws SQLException;
 }

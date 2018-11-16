@@ -6,15 +6,21 @@ public class sale {
 	private int price;
 	private int saleCnt;
 	private int marginRate;
-	
-	@Override
+	private SaleDetail detail;
+	/*@Override
 	public String toString() {
 		return String.format("sale [no=%s, code=%s, price=%s, saleCnt=%s, marginRate=%s]", no, code, price, saleCnt,
 				marginRate);
-	}
+	}*/
 
 	public int getNo() {
 		return no;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("sale [no=%s, code=%s, price=%s, saleCnt=%s, marginRate=%s, detail=%s]", no, code, price,
+				saleCnt, marginRate, detail);
 	}
 
 	public void setNo(int no) {
@@ -69,5 +75,36 @@ public class sale {
 	public sale(int no) {
 		this.no = no;
 	}
+
+	public SaleDetail getDetail() {
+		return detail;
+	}
+
+	public void setDetail(SaleDetail detail) {
+		this.detail = detail;
+	}
+
+	public sale(Product code) {
+		this.code = code;
+	}
+	
+	public Product getProduct() {
+		return code;
+	}
+
+	public void setProduct(Product product) {
+		this.code = product;
+	}
+
+	public sale(int no, Product code, int price, int saleCnt, int marginRate, SaleDetail detail) {
+		this.no = no;
+		this.code = code;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
+		this.detail = detail;
+	}
+	
+
 	
 }
