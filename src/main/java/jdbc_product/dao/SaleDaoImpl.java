@@ -61,7 +61,7 @@ public  class SaleDaoImpl implements SaleDao {
 	public List<sale> selectSaleRank(boolean isSale) throws SQLException {
 		LogUtil.prnLog("selectSaleRank");
 		List<sale> list = new ArrayList<>();
-		String sql = "{call price_rank(?)}";
+		String sql = "{call sell(?)}";
 		try(Connection conn = ConnectionProvider.getConnection();
 				CallableStatement cs = conn.prepareCall(sql);){
 			cs.setBoolean(1, isSale);
@@ -85,11 +85,11 @@ public  class SaleDaoImpl implements SaleDao {
 		int price = rs.getInt("price");
 		int saleCnt = rs.getInt("saleCnt");
 		int marginRate = rs.getInt("marginRate");
-		int supplyprice = rs.getInt("supplyprice");
+		int supplyprice = rs.getInt("supply");
 		int addtax = rs.getInt("addtax");
 		int saleprice = rs.getInt("saleprice");
-		int marginprice = rs.getInt("marginprice");
-		int rank = rs.getInt("rank");
+		int marginprice = rs.getInt("margin");
+		int rank = rs.getInt("순위");
 		
 		SaleDetail detail = new SaleDetail(supplyprice, addtax, saleprice, marginprice, rank);
 		sale sale = new sale(no, product, price, saleCnt, marginRate, detail);

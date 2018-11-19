@@ -58,21 +58,21 @@ public class sellRank extends JPanel {
 		private void tableCellAlignment(int align, int...idx) {
 			DefaultTableCellRenderer dtcr = new DefaultTableCellRenderer();
 			dtcr.setHorizontalAlignment(align);
-			TableColumnModel tcm = table.getColumnModel();
+			TableColumnModel tcm = table_1.getColumnModel();
 			for(int i = 0 ; i < idx.length ; i++) {
 				tcm.getColumn(idx[i]).setCellRenderer(dtcr);
 			}
 		}
 		//폭
 		private void tableSetWidth(int...width) {
-			TableColumnModel tcm = table.getColumnModel();
+			TableColumnModel tcm = table_1.getColumnModel();
 			for(int i = 0 ; i < width.length ; i++) {
 				tcm.getColumn(i).setPreferredWidth(width[i]);
 			}
 		}
 		//loadDatas
 		public void loadDatas() {
-			table.setModel(new DefaultTableModel(
+			table_1.setModel(new DefaultTableModel(
 					getDatas(),
 					getColumnNames()
 				));
@@ -87,7 +87,7 @@ public class sellRank extends JPanel {
 				datas[i] = getSaleRow(list.get(i));
 			}
 			datas[list.size()] = getTotal();
-			return null;
+			return datas;
 		}
 		private Object[] getTotal() {
 			LogUtil.prnLog("getTotal()");
